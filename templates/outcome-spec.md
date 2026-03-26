@@ -34,13 +34,18 @@
 > Every constraint must be executable as a test.
 > If it cannot be run as a test, it is not a constraint — it is an opinion.
 > Use specific numbers, thresholds, and observable behaviors.
-> No prose like "the user should be able to..." — that is an opinion.
 
-| ID | Constraint | Test Method |
-|----|-----------|-------------|
-| AC-01 | *[Specific, measurable, testable statement]* | *[How this is verified — automated test, benchmark, observation]* |
-| AC-02 | *[Specific, measurable, testable statement]* | *[How this is verified]* |
-| AC-03 | *[Specific, measurable, testable statement]* | *[How this is verified]* |
+> **Anti-patterns that make constraints un-executable:**
+> - Intent language: "capable of," "should be able to," "importable" — these are opinions, not constraints
+> - Implicit preconditions: "given the system is running" — name the exact system state, named data, and config
+> - Missing error paths: what happens at the boundary is as important as the happy path
+> - Scope bleed: if there is no "What This Is Not" section, the constraint is not done
+
+| ID | Constraint | Precondition | Test Method | Boundary / Edge Case |
+|----|-----------|--------------|-------------|----------------------|
+| AC-01 | *[Specific, measurable, testable statement]* | *[Exact system state required before this constraint applies]* | *[How this is verified — automated test, benchmark, observation]* | *[What happens at the limit, on error, or when input is invalid]* |
+| AC-02 | *[Specific, measurable, testable statement]* | *[Exact system state]* | *[How this is verified]* | *[Edge case or error path]* |
+| AC-03 | *[Specific, measurable, testable statement]* | *[Exact system state]* | *[How this is verified]* | *[Edge case or error path]* |
 
 ---
 
@@ -48,8 +53,10 @@
 
 > Explicitly state what is out of scope.
 > This prevents scope creep and keeps the spec honest.
+> The absence of this section is a signal the spec hasn't been scoped.
+> Reference related spec IDs where applicable.
 
-- Not: *[excluded scope item]*
+- Not: *[excluded scope item — reference OS-ID if covered elsewhere]*
 - Not: *[excluded scope item]*
 - Not: *[excluded scope item]*
 
@@ -116,3 +123,4 @@
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
 | 0.1 | YYYY-MM-DD | *[Name]* | Initial draft |
+| 0.2 | 2026-03-26 | Theron James | Added Precondition and Boundary columns to AC table; added anti-patterns note; strengthened What This Is Not guidance |
