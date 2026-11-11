@@ -14,6 +14,8 @@
 | **Scope** | Which Outcome Specs and Delivery Sequences this dashboard covers |
 | **Owner** | System (agent-generated) |
 | **Last Refreshed** | YYYY-MM-DD HH:MM |
+| **Revision** | *[commit + dirty-file hashes the scores were computed on]* |
+| **Environment** | *[Toolchain, runtime, and test environment versions]* |
 
 ---
 
@@ -26,10 +28,15 @@
 | ✅ Passing (≥80%) | 0 | 0% |
 | 🟡 At Risk (50–79%) | 0 | 0% |
 | 🔴 Failing (<50%) | 0 | 0% |
+| ⚪ Unavailable (check could not run) | 0 | 0% |
+| ⏳ Stale (inputs changed since last run) | 0 | 0% |
 | ⬜ Not Run | 0 | 0% |
 | **Total Specs** | **0** | |
 
 **Overall System Confidence:** `0%`
+
+> Keep four things separate and never average them into one number: functional correctness, architecture (contract conformance), evidence validity, and the human outcome.
+> A failed critical invariant shows as failing whatever the aggregate says. Unavailable and Stale are not passing.
 
 ---
 
@@ -62,6 +69,30 @@
 | Contract ID | Title | Support State | Dependent Specs | Issue |
 |-------------|-------|--------------|----------------|-------|
 | CC-[ID] | *[Title]* | Partial / Unsupported | *[n]* | *[Description]* |
+
+---
+
+## Prevention
+
+> The metric that matters is how much the gate still finds. See [The Factory That Can't Fail](https://theronjames.substack.com/p/the-factory-that-cant-fail).
+
+| Metric | Value | Target |
+|--------|-------|--------|
+| Late discoveries this cycle (found at the gate or after) | 0 | 0 |
+| Late discoveries by cause | *[spec gap / contract gap / missing check / stale evidence / defect]* | — |
+| Independent-check coverage (% of active specs with a check the builder didn't write) | 0% | — |
+
+> Zero discoveries does not prove zero defects. Keep independent inspection running to challenge shared blind spots, and reward honest reporting.
+
+---
+
+## Check Enforcement
+
+> Which protections actually run, and where. A check described only in instructions is advisory.
+
+| Check | Protects | Status | Runs In |
+|-------|----------|--------|---------|
+| *[Check name]* | *[Spec / Contract]* | Planned / Advisory / Enforced | *[Pre-push hook, CI, merge gate, none]* |
 
 ---
 

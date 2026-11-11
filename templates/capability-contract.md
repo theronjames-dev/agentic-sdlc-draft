@@ -1,5 +1,6 @@
 # Capability Contract
-> A versioned declaration of what the system promises.
+> A versioned declaration of what the system promises, and the boundary it is built inside.
+> Agents read the applicable contract before choosing an implementation, not after.
 > When this contract changes, every dependent Outcome Spec is immediately flagged.
 
 ---
@@ -28,6 +29,24 @@
 
 ---
 
+## Boundary
+
+> The engineering boundary this capability lives inside.
+> Passing tests do not establish that these hold. Record them, then verify them.
+> Prefer a few coherent contracts over one per class or file.
+
+| Field | Entry |
+|-------|-------|
+| **Scope** | *[Subsystem and source locations covered]* |
+| **Responsibility** | *[What it owns. Neighboring owners. What it explicitly does not own]* |
+| **State and mutation** | *[Who owns mutable state, which operations may change it, what is read-only]* |
+| **Lifetime** | *[Request / session / process. Behavior on reset, interruption, reload, and teardown]* |
+| **Execution** | *[Where it runs in the scheduler or pipeline. When decisions become effects]* |
+| **Dependencies** | *[Direction of dependencies. Lifetime of borrowed references, definitions, and assets]* |
+| **Failure behavior** | *[Invalid input, unavailable resource, partial operation. What valid state is retained]* |
+
+---
+
 ## Contract Terms
 
 > The specific, versioned promises this contract makes.
@@ -48,10 +67,12 @@
 > Not aspirational — document current reality.
 > This is what makes the contract trustworthy.
 
-| ID | Failure Mode | Conditions | Recommended Fallback |
-|----|-------------|------------|----------------------|
-| FM-01 | *[What breaks]* | *[When / under what conditions]* | *[What to use instead]* |
-| FM-02 | *[What breaks]* | *[When / under what conditions]* | *[What to use instead]* |
+| ID | Failure Mode | Conditions | Retained State | Recommended Fallback |
+|----|-------------|------------|----------------|----------------------|
+| FM-01 | *[What breaks]* | *[When / under what conditions]* | *[What stays valid after the failure]* | *[What to use instead]* |
+| FM-02 | *[What breaks]* | *[When / under what conditions]* | *[What stays valid]* | *[What to use instead]* |
+
+> A required write that fails must surface as a failure. Never claim evidence exists when the write that produced it failed.
 
 ---
 
@@ -67,6 +88,31 @@
 **Confidence Level:** High / Medium / Low
 
 **Notes:** *[Any additional context on support state]*
+
+---
+
+## Evidence and Conformance
+
+> How you know the boundary and terms actually hold, on which revision.
+
+| Check | Covers | Enforcement | Last Result | Revision |
+|-------|--------|-------------|-------------|----------|
+| *[Named check]* | *[Term or boundary field]* | Planned / Advisory / Enforced | Pass / Fail / Unavailable / Stale | *[commit]* |
+
+**Conformance:** Established / Gap / Exception / Unverified
+
+**Invalidated by:** *[Changes that make the evidence above stale: sources, data, contract version, tool or engine version, environment]*
+
+> A check is **Enforced** only when the actual merge or status path runs it. Instructions alone are advisory.
+> Promote a check to blocking only after it catches a planted violation and passes a valid control.
+
+### Exceptions and Known Violations
+
+> Existing violations are tracked debt, not passes. Writing a contract does not certify them. Do not worsen them.
+
+| Invariant | Supported Conditions | Risk | Owner / Tracker | Expiry or Removal Trigger |
+|-----------|---------------------|------|-----------------|---------------------------|
+| *[What is violated]* | *[When it is safe]* | *[What could go wrong]* | *[Name / issue]* | *[Date or concrete trigger]* |
 
 ---
 
@@ -113,3 +159,5 @@
 | Version | Date | Author | Change | Specs Impacted |
 |---------|------|--------|--------|----------------|
 | 0.1 | YYYY-MM-DD | *[Name]* | Initial draft | — |
+
+*Template revision 0.3 (2026-11-11): added Boundary, retained state on failure, and Evidence and Conformance with enforcement status and tracked exceptions.*

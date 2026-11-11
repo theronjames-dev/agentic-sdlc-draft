@@ -62,6 +62,11 @@
 | **Runtime Failure** | System executed but task did not complete as expected | Engineering |
 | **Strategic Judgment** | Tradeoff between constraints requires business decision | Product + Leadership |
 | **Scope Boundary** | Request is outside current capability — needs honest routing | Spec Owner |
+| **Spec Gap** | Agent needed a decision the spec didn't make. Charge it to the spec, not the agent | Spec Owner |
+| **Contract Violation** | Change would break a capability boundary or worsen tracked debt | Contract Owner |
+| **Stale Evidence** | A result is being relied on after its inputs changed | Engineering |
+| **Unavailable Verification** | A required check could not run. Dependent claims stay unresolved | Engineering |
+| **Calibration Miss** | An evaluator's sealed prediction disagreed with the human judge | Spec Owner + Evaluator |
 
 ---
 
@@ -80,6 +85,7 @@
 
 > Recurring exception types signal systemic issues — not one-off failures.
 > Review monthly. If a type appears 3+ times, the underlying spec or contract needs revision.
+> Fix a pattern with an interface or a check, plus a test showing the check detects it. More documentation is not a fix, and a growing rulebook is not evidence the fix worked.
 
 | Type | Count (Last 30 Days) | Trend | Action Needed |
 |------|---------------------|-------|---------------|
