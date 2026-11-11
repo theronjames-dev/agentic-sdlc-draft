@@ -2,6 +2,8 @@
 
 *The post-agentic SDLC, as templates. Current version: v0.3.*
 
+![Five artifacts replace the entire current stack](assets/five-artifacts-v0.3.png)
+
 **Five artifacts replace the entire current stack.**
 
 Not five more documents. Five machine-readable structures that agents operate against continuously.
