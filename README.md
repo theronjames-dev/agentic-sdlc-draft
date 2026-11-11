@@ -1,4 +1,6 @@
-# Post-Agentic SDLC Templates
+# Agentic Flow Templates
+
+*The post-agentic SDLC, as templates. Current version: v0.3.*
 
 **Five artifacts replace the entire current stack.**
 
@@ -106,13 +108,15 @@ Gate Assessment
 
 ## Where to Start
 
-Take one active user story. Rewrite the acceptance criteria so every single one is executable as a test.
+Take one active user story. Rewrite the acceptance criteria so every single one names how it is verified.
 
 Not *"the user can complete onboarding."* That is an opinion.
 
-*"A new user with no prior account completes onboarding in under 4 minutes with zero support interactions."* That is a constraint.
+*"A new user with no prior account completes onboarding in under 4 minutes with zero support interactions."* That is a constraint, and it runs as a test.
 
-If you cannot make an acceptance criterion executable, you do not yet know what you are building. That is useful information.
+Some criteria are judgments and won't reduce to a test. For those, name the judge, the evidence they decide from, and who records a prediction before the judge looks.
+
+If you cannot say how a criterion gets verified, you do not yet know what you are building. That is useful information.
 
 ---
 
